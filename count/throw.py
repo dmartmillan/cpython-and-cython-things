@@ -21,7 +21,8 @@ def benchmark(generator_func, max_value):
 
 
 # Set a high number for performance comparison
-MAX_COUNT = 1e9
+MAX_COUNT = 1e10
+print(f"For {MAX_COUNT} as max value:")
 
 # Benchmark CPython C extension generator
 c_time = benchmark(count_module.count_up_to, MAX_COUNT)
