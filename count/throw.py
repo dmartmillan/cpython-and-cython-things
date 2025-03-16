@@ -1,6 +1,8 @@
 import time
 import count_module
-
+import seaborn as sns
+import numpy as np
+import matplotlib.pyplot as plt
 
 # Pure Python generator function
 def python_count_up_to(max_value):
@@ -36,3 +38,41 @@ print(f"Pure Python generator time: {python_time:.6f} seconds")
 if python_time > 0:
     speedup = python_time / c_time
     print(f"Speedup: {speedup:.2f}x faster with C extension")
+
+c_times = []
+python_times = []
+
+max_counts = [10**x for x in range(1, 11)]
+
+for max_count in max_counts:
+    print(f"Benchmarking for {max_count} iterations...")
+
+    # Benchmark CPython C extension generator
+    c_time = benchmark(count_module.count_up_to, max_count)
+    c_times.append(c_time)
+
+    # Benchmark pure Python generator
+    python_time = benchmark(python_count_up_to, max_count)
+    python_times.append(python_time)
+
+max_counts = np.array(max_counts)
+c_times = np.array(c_times)
+python_times = np.array(python_times)
+
+# Plot the results
+sns.set_style("whitegrid")
+plt.figure(figsize=(10, 6))
+
+plt.plot(max_counts, c_times, label="C Extension", marker="o", linestyle="-")
+plt.plot(max_counts, python_times, label="Pure Python", marker="s", linestyle="--")
+
+plt.xscale("log")
+plt.yscale("log")
+plt.xlabel("Max Count (log scale)")
+plt.ylabel("Execution Time (seconds, log scale)")
+plt.title("Performance Comparison: C Extension vs Pure Python")
+plt.legend()
+
+plot_filename = "./performance_comparison_log.png"
+plt.savefig(plot_filename, dpi=300)
+plt.show()

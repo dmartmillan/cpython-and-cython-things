@@ -12,3 +12,12 @@ Pure Python generator time: 451.412966 seconds
 Speedup: 2.53x faster with C extension
 ```
 
+#### Performance comparison
+
+Linear scale
+
+![linear comparison](performance_comparison.png)
+
+Logarithmic scale
+
+![log comparison](performance_comparison_log.png)
