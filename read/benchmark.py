@@ -1,7 +1,7 @@
 import time
 from regular_io import regular_io
 from mmap_io import mmap_io
-import mmap_io_extension_module
+import mmap_module
 
 # Benchmarking function
 def benchmark(generator_func, filename):
@@ -23,5 +23,5 @@ python_time = benchmark(mmap_io, FILENAME)
 print(f"mmap I/O time: {python_time:.6f} seconds")
 
 # Benchmark mmap I/O with C extension
-python_time = benchmark(mmap_io_extension_module.mmap_io_extension, FILENAME)
+python_time = benchmark(mmap_module.mmap_io, FILENAME)
 print(f"mmap I/O with C extension time: {python_time:.6f} seconds")
