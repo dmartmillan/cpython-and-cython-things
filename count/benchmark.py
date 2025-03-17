@@ -3,13 +3,7 @@ import count_module
 import seaborn as sns
 import numpy as np
 import matplotlib.pyplot as plt
-
-# Pure Python generator function
-def python_count_up_to(max_value):
-    count = 1
-    while count <= max_value:
-        yield count
-        count += 1
+from count_python import python_count_up_to
 
 
 # Benchmarking function
@@ -42,7 +36,7 @@ if python_time > 0:
 c_times = []
 python_times = []
 
-max_counts = [10**x for x in range(1, 11)]
+max_counts = [10**x for x in range(1, 13)]
 
 for max_count in max_counts:
     print(f"Benchmarking for {max_count} iterations...")
@@ -54,12 +48,28 @@ for max_count in max_counts:
     # Benchmark pure Python generator
     python_time = benchmark(python_count_up_to, max_count)
     python_times.append(python_time)
+    print(f"{c_time:.6f} - {python_time:.6f}")
 
 max_counts = np.array(max_counts)
 c_times = np.array(c_times)
 python_times = np.array(python_times)
 
 # Plot the results
+sns.set_style("whitegrid")
+plt.figure(figsize=(10, 6))
+
+plt.plot(max_counts, c_times, label="C Extension", marker="o", linestyle="-")
+plt.plot(max_counts, python_times, label="Pure Python", marker="s", linestyle="--")
+
+plt.xlabel("Max Count")
+plt.ylabel("Execution Time (seconds)")
+plt.title("Performance Comparison: C Extension vs Pure Python")
+plt.legend()
+
+plot_filename = "./performance_comparison.png"
+plt.savefig(plot_filename, dpi=300)
+plt.show()
+
 sns.set_style("whitegrid")
 plt.figure(figsize=(10, 6))
 
