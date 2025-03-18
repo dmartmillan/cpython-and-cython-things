@@ -1,6 +1,7 @@
 import time
 from regular_io import regular_io
 from mmap_io import mmap_io
+from mmap_cython import mmap_cython
 import mmap_module
 
 # Benchmarking function
@@ -12,7 +13,7 @@ def benchmark(generator_func, filename):
 
     return end_time - start_time
 
-FILENAME = "../dataset/example.txt"
+FILENAME = "../dataset/ACC.maf"
 
 # Benchmark Regular I/O
 c_time = benchmark(regular_io, FILENAME)
@@ -25,3 +26,9 @@ print(f"mmap I/O time: {python_time:.6f} seconds")
 # Benchmark mmap I/O with C extension
 python_time = benchmark(mmap_module.mmap_io, FILENAME)
 print(f"mmap I/O with C extension time: {python_time:.6f} seconds")
+
+# Benchmark mmap I/O with C extension
+python_time = benchmark(mmap_cython, FILENAME)
+print(f"mmap I/O in Cython time: {python_time:.6f} seconds")
+
+

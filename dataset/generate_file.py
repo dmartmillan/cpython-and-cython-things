@@ -2,14 +2,17 @@ import random
 import string
 
 def generate_utf8_file(size_in_mb, file_name):
-    mega_byte = 1_000_000  # Approximate size of 1MB in characters
-    chars_per_mb = mega_byte   # Each UTF-8 character takes ~2 bytes on average
+    target_size = size_in_mb * 1_000_000  # Total target size in characters
+    line_length = 100  # Length of each line in characters
+    # Each line has an extra newline character, so account for that in the size
+    num_lines = target_size // (line_length + 1)
+    characters = string.ascii_letters + string.digits + string.punctuation + " "
 
     with open(file_name, 'w', encoding='utf-8') as file:
-        for _ in range(size_in_mb):
-            random_text = ''.join(random.choices(string.ascii_letters + string.digits + string.punctuation + " ", k=chars_per_mb))
-            file.write(random_text)
+        for _ in range(int(num_lines)):
+            random_line = ''.join(random.choices(characters, k=line_length))
+            file.write(random_line + "\n")
 
 # Size in MB
-SIZE = 1024
+SIZE = 2048
 generate_utf8_file(SIZE, "example.txt")
