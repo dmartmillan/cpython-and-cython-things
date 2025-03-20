@@ -1,4 +1,4 @@
-# CPython examples
+# Fast things
 
 [count module](./count) - generative simple loop
 
