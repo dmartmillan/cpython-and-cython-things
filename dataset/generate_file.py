@@ -14,5 +14,5 @@ def generate_utf8_file(size_in_mb, file_name):
             file.write(random_line + "\n")
 
 # Size in MB
-SIZE = 2048
-generate_utf8_file(SIZE, "example.txt")
+SIZE = 10000
+generate_utf8_file(SIZE, "example2.txt")
