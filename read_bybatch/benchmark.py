@@ -19,5 +19,5 @@ python_time = benchmark(mmap_io, FILENAME)
 print(f"mmap I/O time: {python_time:.6f} seconds")
 
 # Benchmark mmap with batch I/O
-#python_time = benchmark(mmap_io_batch, FILENAME)
-#print(f"mmap I/O with batch time: {python_time:.6f} seconds")
+python_time = benchmark(mmap_io_batch, FILENAME)
+print(f"mmap I/O with batch time: {python_time:.6f} seconds")

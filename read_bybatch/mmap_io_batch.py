@@ -1,4 +1,3 @@
-import itertools
 import mmap
 
 BATCH_SIZE = 2048
