@@ -1,6 +1,6 @@
 import mmap
 
-BATCH_SIZE = 2048
+BATCH_SIZE = 2621440
 
 def mmap_io_batch(filename):
     with open(filename, mode="r", encoding="utf8") as file_obj:
@@ -9,5 +9,5 @@ def mmap_io_batch(filename):
             offset = 0
             while offset < file_size:
                 chunk = mmap_obj[offset:offset + BATCH_SIZE]
-                yield chunk
+                yield chunk.decode('utf-8').replace("0", "o")
                 offset += BATCH_SIZE

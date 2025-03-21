@@ -1,6 +1,7 @@
 import time
 from mmap_io import mmap_io
 from mmap_io_batch import mmap_io_batch
+from mmap_io_batch_parallel import mmap_io_batch_parallel
 
 # Benchmarking function
 def benchmark(generator_func, filename):
@@ -21,3 +22,7 @@ print(f"mmap I/O time: {python_time:.6f} seconds")
 # Benchmark mmap with batch I/O
 python_time = benchmark(mmap_io_batch, FILENAME)
 print(f"mmap I/O with batch time: {python_time:.6f} seconds")
+
+# Benchmark mmap with batch and parallel I/O
+python_time = benchmark(mmap_io_batch_parallel, FILENAME)
+print(f"mmap I/O with batch and parallel time: {python_time:.6f} seconds")
